@@ -43,17 +43,17 @@ module "bastion" {
   bastions = var.bastions
 }
 
-module "key_vault" {
-  depends_on = [module.resource_groups]
-  source = "../../modules/azurerm_key_vault"
-  key_vault = var.key_vault
-}
+# module "key_vault" {
+#   depends_on = [module.resource_groups]
+#   source = "../../modules/azurerm_key_vault"
+#   key_vault = var.key_vault
+# }
 
-module "key_vault_secret" {
-  depends_on = [module.key_vault ]
-  source = "../../modules/azurerm_key_vault_secret"
-  key_vault_secret = var.key_vault_secret
-}
+# module "key_vault_secret" {
+#   depends_on = [module.key_vault ]
+#   source = "../../modules/azurerm_key_vault_secret"
+#   key_vault_secret = var.key_vault_secret
+# }
 
 module "sql_server" {
   depends_on = [ module.resource_groups ]

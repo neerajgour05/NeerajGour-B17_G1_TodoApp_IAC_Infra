@@ -7,14 +7,7 @@ rgs = {
      environment = "dev"
         }
  }
- rg2 = {
-   name       = "todoapp-rg2"
-   location   = "centralindia"
-   managed_by = "Terraform"
-   tags = {
-     environment = "dev"
-        }
- }
+
 }
 
 storage_accounts = {
@@ -51,10 +44,10 @@ networks = {
         address_prefixes = ["10.0.2.0/24"]
       },
 
-      {
-        name             = "azurebastionsubnet"
-        address_prefixes = ["10.0.3.0/27"]
-      },
+      # {
+      #   name             = "azurebastionsubnet"
+      #   address_prefixes = ["10.0.3.0/27"]
+      # },
     ]
   }
  }
@@ -82,6 +75,19 @@ networks = {
       env = "dev"
     }
   }
+
+  bastion-pip = {
+    name                = "pip-bastion-todoapp"
+    resource_group_name = "todoapp-rg"
+    location            = "centralindia"
+    allocation_method   = "Static"
+
+    tags = {
+      app = "bastion"
+      env = "dev"
+    }
+  }
+
  }
 
 vms = {
@@ -141,7 +147,7 @@ bastions = {
 
 key_vault = {
   kv1 = {
-    name                        = "kv-tododev"
+    name                        = "neeraj-kv-tododev"
     resource_group_name         = "todoapp-rg"
     location                    = "centralindia"
     enabled_for_disk_encryption = true
@@ -157,20 +163,20 @@ key_vault = {
 
 key_vault_secret = {
   secret1 = {
-    key_name            = "kv-dev"
+    key_name            = "neeraj-kv-tododev"
     resource_group_name = "todoapp-rg"
-    secret_name         = "admin"
-    secret_value        = "admin"
+    secret_name         = "neerajadmin"
+    secret_value        = "admin123"
   }
 }
 
 sql_server = {
   sql1 = {
-    name = "sqlserver-tododev" 
+    name = "sqlserver-todoapp-dev" 
     location = "centralindia"
     resource_group_name = "todoapp-rg"
     version = "12.0"
-    administrator_login = "adminuser"
+    administrator_login = "neerajadmin"
     administrator_login_password = "admin123"
     minimum_tls_version = "1.2"
     public_network_access_enabled = true
@@ -180,9 +186,9 @@ sql_server = {
 
 sql_database = {
   db1 = {
-    name         = "sqldatabse-tododev"
+    name         = "sqldatabse-todoapp-dev"
     # server_id   = "/subscriptions/2a6429ab-34bc-4c09-812c-9e5d8ceee0d7/resourceGroups/rg_dev/providers/Microsoft.Sql/servers/sqlserver-dev-uday01"
-    server_name  = "sqlserver-tododev"
+    server_name  = "sqlserver-todoapp-dev"
     collation    = "SQL_Latin1_General_CP1_CI_AS"
     license_type = "LicenseIncluded"
     max_size_gb  = 2

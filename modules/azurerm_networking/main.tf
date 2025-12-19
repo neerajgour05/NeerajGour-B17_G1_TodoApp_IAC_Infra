@@ -17,7 +17,7 @@ resource "azurerm_virtual_network" "Vnet" {
 
   subnet {
     name = "azurebastionsubnet"
-    address_prefixes = ["10.0.255.0/27"]
+    address_prefixes = ["10.0.3.0/27"]
   }
 
 }

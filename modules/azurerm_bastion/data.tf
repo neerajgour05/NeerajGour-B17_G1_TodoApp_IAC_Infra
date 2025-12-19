@@ -5,14 +5,14 @@ data "azurerm_virtual_network" "vnet" {
 }
 
 data "azurerm_subnet" "bastion" {
-  for_each = var.bastions
+  
 
-  name                 = "azurebastionsubnet"
-  virtual_network_name = data.azurerm_virtual_network.vnet[each.key].name
-  resource_group_name  = each.value.resource_group_name
+  name                 = "AzureBastionSubnet"
+  virtual_network_name = "devtodoapp-vnet"
+  resource_group_name  = "todoapp-rg"
 }
 data "azurerm_public_ip" "pip" {
-  for_each            = var.bastions
-  name                = each.value.public_ip_name
-  resource_group_name = each.value.resource_group_name
+  
+  name                = "pip-bastion-todoapp"
+  resource_group_name = "todoapp-rg"
 }

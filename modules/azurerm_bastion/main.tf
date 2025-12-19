@@ -8,8 +8,8 @@ resource "azurerm_bastion_host" "bastion" {
 
   ip_configuration {
     name                 = "bastion-ip-config"
-    subnet_id            = data.azurerm_subnet.bastion[each.key].id
-    public_ip_address_id = data.azurerm_public_ip.pip[each.key].id
+    subnet_id            = data.azurerm_subnet.bastion.id
+    public_ip_address_id = data.azurerm_public_ip.pip.id
   }
 
   tags = each.value.tags
